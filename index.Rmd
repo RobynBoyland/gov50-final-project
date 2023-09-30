@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Robyn Boyland"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring data related to adult heroism around children. Over the summer, I worked in a Montessori Daycare as a Toddler Teacher and I noticed that I was less fearful and more motivated while I was around my students. My discomforts and phobias were annulled if they got in the way of providing the best care for my students. I've stumbled across articles in the past that mentioned moms with super-strength, so I'd like to explore this correlation. If this is too specific to find a dataset on, I'd likely broaden it to, "Does having an audience make us do better on a task?" or "Do we do better when we know we're being observed?" I hope these are relevant enough topics!
