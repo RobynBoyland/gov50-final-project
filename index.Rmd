@@ -12,3 +12,7 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to adult heroism around children. Over the summer, I worked in a Montessori Daycare as a Toddler Teacher and I noticed that I was less fearful and more motivated while I was around my students. My discomforts and phobias were annulled if they got in the way of providing the best care for my students. I've stumbled across articles in the past that mentioned moms with super-strength, so I'd like to explore this correlation. If this is too specific to find a dataset on, I'd likely broaden it to, "Does having an audience make us do better on a task?" or "Do we do better when we know we're being observed?" I hope these are relevant enough topics!
+
+The question I am tackling is “Is the world getting more violent over time?” My hypothesis is that it is getting more violent over time. I think this because there as been a recent sweep of weapons that are mass destructive. People are using our technological advancements for bad things. The advancement also means that people are able to remove themselves from the bad things they do. My explanatory variable of interest is number of deaths in each of the countries found in my data set and how it is measured is simply by the variable `deaths`. My outcome variable of interest and how it is measured is violence which will be a function or rate of change of deaths in the past versus deaths now. If it increases, my hypothesis is right.
+
+Link to the data I am using: https://www.dropbox.com/s/8zms0isy8epvzvd/violence.csv?dl=0
