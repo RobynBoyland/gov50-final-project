@@ -13,6 +13,26 @@ output:
 
 I am interested in exploring data related to adult heroism around children. Over the summer, I worked in a Montessori Daycare as a Toddler Teacher and I noticed that I was less fearful and more motivated while I was around my students. My discomforts and phobias were annulled if they got in the way of providing the best care for my students. I've stumbled across articles in the past that mentioned moms with super-strength, so I'd like to explore this correlation. If this is too specific to find a dataset on, I'd likely broaden it to, "Does having an audience make us do better on a task?" or "Do we do better when we know we're being observed?" I hope these are relevant enough topics!
 
-The question I am tackling is “Is the world getting more violent over time?” My hypothesis is that it is getting more violent over time. I think this because there as been a recent sweep of weapons that are mass destructive. People are using our technological advancements for bad things. The advancement also means that people are able to remove themselves from the bad things they do. My explanatory variable of interest is number of deaths in each of the countries found in my data set and how it is measured is simply by the variable `deaths`. My outcome variable of interest and how it is measured is violence which will be a function or rate of change of deaths in the past versus deaths now. If it increases, my hypothesis is right.
+Based on the availability of data sets, I revised my question to be more applicable to the public sector. The question I am now tackling is, “Do police respond faster when victims are younger?” My hypothesis is that police response time is positively correlated with victim ages. In other words, when victims get older, response time goes up. The reason why I am making this hypothesis is rooted in the theory of reproductive value. As I've learned in the Human Nature course taught by Joe Henrich, we are evolutionarily hardwired to grieve the most for people closest to the age of prime reproduction with the most reproductive time left. This theory posits that we'd grieve more for an 11 year old than we would a 30 year old. With this rationale, police would act the most preventatively for people with the most reproductive value, aka youth. Because of this, I hypothesize that police would allow a smaller amount of victims for shootings that happen at schools or other areas that are known to have children. My explanatory variable is shooting setting (school or non-school). My outcome variable is the number of victims. If I find that there are significantly  fewer deaths on average for locations known to have children, it will confirm my hypothesis.
 
-Link to the data I am using: https://www.dropbox.com/s/8zms0isy8epvzvd/violence.csv?dl=0
+Link to the data I am using: https://www.kaggle.com/datasets/zusmani/us-mass-shootings-last-50-years
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+df <- read_csv("data/Mass Shootings Dataset Ver 5.csv", show_col_types = FALSE) |>
+  janitor::clean_names()
+
+df |>
+  head()
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(data = df, aes(x =fatalities, y = injured)) +
+  geom_point()
+```
+
