@@ -1583,7 +1583,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 </div>
 <p>Based on this table, we see that the average total victims for non-school shootings is about one person greater than school shootings, which supports my hypothesis that police respond faster to shootings involving children. Of course, it does not confirm the hypothesis because lots of things can contribute to victim count other than police response time, such as type of gun used and the density of people in one location.</p>
-Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate representation of the victim counts may be to find the median of each shooting type:
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>median_victim_count</span> <span class='op'>&lt;-</span> <span class='va'>shootings</span> <span class='op'>|&gt;</span></span>
@@ -1592,13 +1591,13 @@ Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate repr
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>median_victim_count</span>,</span>
 <span>              col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Shooting Type"</span>,</span>
-<span>                            <span class='st'>"Average Total Victims"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>                            <span class='st'>"Median Total Victims"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Shooting Type</th>
-<th style="text-align: right;">Average Total Victims</th>
+<th style="text-align: right;">Median Total Victims</th>
 </tr>
 </thead>
 <tbody>
@@ -1613,8 +1612,7 @@ Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate repr
 </tbody>
 </table>
 </div>
-<p>Still, there is typically a greater number of victims in non-school shootings.</p>
-This boxplot represents the medians in context with the other quartiles for each shooting type. Comparing the minimums and maximums, both shooting types seem to have similar minimums, but school shooters have a greater maximum, ignoring outliers. There are many more outlier in non-school shootings, which suggests that that shooting type has more spread/variation:
+<p>Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate representation of the victim counts may be to find the median of each shooting type. Still, there is typically a greater number of victims in non-school shootings.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
@@ -1627,6 +1625,7 @@ This boxplot represents the medians in context with the other quartiles for each
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
+<p>This boxplot represents the medians in context with the other quartiles for each shooting type. Comparing the minimums and maximums, both shooting types seem to have similar minimums, but school shooters have a greater maximum, ignoring outliers. There are many more outlier in non-school shootings, which suggests that that shooting type has more spread/variation.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

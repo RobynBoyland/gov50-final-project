@@ -50,7 +50,7 @@ Based on this table, we see that the average total victims for non-school shooti
 
 
 
-Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate representation of the victim counts may be to find the median of each shooting type:
+
 ```{r}
 median_victim_count <- shootings |>
     group_by(shooting_type) |>
@@ -58,12 +58,12 @@ median_victim_count <- shootings |>
 
 knitr::kable(median_victim_count,
               col.names = c("Shooting Type",
-                            "Average Total Victims"))
+                            "Median Total Victims"))
 ```
-Still, there is typically a greater number of victims in non-school shootings.
+Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate representation of the victim counts may be to find the median of each shooting type. Still, there is typically a greater number of victims in non-school shootings.
 
 
-This boxplot represents the medians in context with the other quartiles for each shooting type. Comparing the minimums and maximums, both shooting types seem to have similar minimums, but school shooters have a greater maximum, ignoring outliers. There are many more outlier in non-school shootings, which suggests that that shooting type has more spread/variation:
+
 ```{r}
 library(ggplot2)
 
@@ -74,4 +74,6 @@ ggplot(data = shootings, aes(x = shooting_type, y = total_victims)) +
        y = "Total Number of Victims")
 
 ```
+This boxplot represents the medians in context with the other quartiles for each shooting type. Comparing the minimums and maximums, both shooting types seem to have similar minimums, but school shooters have a greater maximum, ignoring outliers. There are many more outlier in non-school shootings, which suggests that that shooting type has more spread/variation.
+
 
