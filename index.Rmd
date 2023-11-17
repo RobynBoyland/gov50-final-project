@@ -13,7 +13,7 @@ output:
 
 I am interested in exploring data related to adult heroism around children. Over the summer, I worked in a Montessori Daycare as a Toddler Teacher and I noticed that I was less fearful and more motivated while I was around my students. My discomforts and phobias were annulled if they got in the way of providing the best care for my students. I've stumbled across articles in the past that mentioned moms with super-strength, so I'd like to explore this correlation. If this is too specific to find a dataset on, I'd likely broaden it to, "Does having an audience make us do better on a task?" or "Do we do better when we know we're being observed?" I hope these are relevant enough topics!
 
-Based on the availability of data sets, I revised my question to be more applicable to the public sector. The question I am now tackling is, “Do police respond faster when victims are younger?” My hypothesis is that police response time is positively correlated with victim ages. In other words, when victims get older, response time goes up. The reason why I am making this hypothesis is rooted in the theory of reproductive value. As I've learned in the Human Nature course taught by Joe Henrich, we are evolutionarily hardwired to grieve the most for people closest to the age of prime reproduction with the most reproductive time left. This theory posits that we'd grieve more for an 11 year old than we would a 30 year old. With this rationale, police would act the most preventatively for people with the most reproductive value, aka youth. Because of this, I hypothesize that police would allow a smaller amount of victims for shootings that happen at schools or other areas that are known to have children. My explanatory variable is shooting setting (school or non-school). My outcome variable is the number of victims. If I find that there are significantly  fewer deaths on average for locations known to have children, it will confirm my hypothesis.
+Based on the availability of data sets, I revised my question to be more applicable to the public sector. The question I am now tackling is, “Do police respond faster when victims are younger?” My hypothesis is that police response time is positively correlated with victim ages. In other words, when victims get older, response time goes up. The reason why I am making this hypothesis is rooted in the theory of reproductive value. As I've learned in the Human Nature course taught by Joe Henrich, we are evolutionarily hardwired to grieve the most for people closest to the age of prime reproduction with the most reproductive time left. This theory posits that we'd grieve more for an 11 year old than we would a 30 year old. With this rationale, police would act the most preventatively for people with the most reproductive value, aka youth. Because of this, I hypothesize that police would allow a smaller amount of victims for shootings that happen at schools, a place they would know to have children. My explanatory variable is shooting setting (school or non-school). My outcome variable is the number of victims. If I find that there are significantly  fewer deaths on average for locations known to have children, it will confirm my hypothesis.
 
 Link to the data I am using: https://www.kaggle.com/datasets/zusmani/us-mass-shootings-last-50-years
 
@@ -21,18 +21,57 @@ Link to the data I am using: https://www.kaggle.com/datasets/zusmani/us-mass-sho
 library(tidyverse)
 library(janitor)
 
-df <- read_csv("data/Mass Shootings Dataset Ver 5.csv", show_col_types = FALSE) |>
+shootings <- read_csv("data/Mass Shootings Dataset Ver 5.csv", show_col_types = FALSE) |>
   janitor::clean_names()
 
-df |>
+shootings |>
   head()
 ```
 
 
 ```{r}
+
+shootings <- shootings |> 
+  mutate(shooting_type = if_else(str_detect(incident_area, "School") == TRUE,
+         "School Shooting",
+         "Non-School Shooting")) |>
+   filter(is.na(shooting_type) == FALSE)
+
+avg_victim_count <- shootings |>
+    group_by(shooting_type) |>
+    summarize(avg_total_victims = mean(total_victims, na.rm = TRUE))
+
+knitr::kable(avg_victim_count,
+              col.names = c("Shooting Type",
+                            "Average Total Victims"))
+
+```
+Based on this table, we see that the average total victims for non-school shootings is about one person greater than school shootings, which supports my hypothesis that police respond faster to shootings involving children. Of course, it does not confirm the hypothesis because lots of things can contribute to victim count other than police response time, such as type of gun used and the density of people in one location. 
+
+
+
+Since the Las Vegas Shooting in 2017 is an immense outlier, a more accurate representation of the victim counts may be to find the median of each shooting type:
+```{r}
+median_victim_count <- shootings |>
+    group_by(shooting_type) |>
+    summarize(median_total_victims = median(total_victims, na.rm = TRUE))
+
+knitr::kable(median_victim_count,
+              col.names = c("Shooting Type",
+                            "Average Total Victims"))
+```
+Still, there is typically a greater number of victims in non-school shootings.
+
+
+This boxplot represents the medians in context with the other quartiles for each shooting type. Comparing the minimums and maximums, both shooting types seem to have similar minimums, but school shooters have a greater maximum, ignoring outliers. There are many more outlier in non-school shootings, which suggests that that shooting type has more spread/variation:
+```{r}
 library(ggplot2)
 
-ggplot(data = df, aes(x =fatalities, y = injured)) +
-  geom_point()
+ggplot(data = shootings, aes(x = shooting_type, y = total_victims)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  labs(x = "Shooting Type",
+       y = "Total Number of Victims")
+
 ```
 
